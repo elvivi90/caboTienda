@@ -1,22 +1,26 @@
-import React, { useContext } from "react";
+import React from "react";
+import { Route, Routes } from "react-router-dom";
 
-import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
-import MainHeader from "./components/MainHeader/MainHeader";
-import AuthContext from "./store/auth-context";
+import Navigation from "./components/Nav/Navigation";
+import Ventas from "./containers/Ventas/Ventas";
+import Stock from "./containers/Stock/Stock";
+import Clientes from "./containers/Clientes/Clientes";
+import Compras from "./containers/Compras/Compras";
+import Balance from "./containers/Balances/Balance";
 
-function App() {
-    const ctx = useContext(AuthContext);
-
+const App = (props) => {
     return (
         <React.Fragment>
-            <MainHeader />
-            <main>
-                {!ctx.isLoggedIn && <Login />}
-                {ctx.isLoggedIn && <Home />}
-            </main>
+            <Navigation />
+            <Routes>
+                <Route path="/" element={<Ventas />} />
+                <Route path="/compras" element={<Compras />} />
+                <Route path="/stock" element={<Stock />} />
+                <Route path="/clientes" element={<Clientes />} />
+                <Route path="/balance" element={<Balance />} />
+            </Routes>
         </React.Fragment>
     );
-}
+};
 
 export default App;
