@@ -59,7 +59,6 @@ const columns = [
     width: 130,
     description: "Descripcion del producto",
   },
-  { field: "precio compra", headerName: "Valor Compra", width: 130 },
   { field: "color", headerName: "Color", width: 130 },
   { field: "talle", headerName: "Talle", width: 70 },
   {
@@ -74,6 +73,8 @@ const columns = [
     //         "lastName"
     //     ) || ""}`,
   },
+
+  { field: "precio compra", headerName: "Valor Compra", width: 130 },
 ];
 
 const Stock = (props) => {
