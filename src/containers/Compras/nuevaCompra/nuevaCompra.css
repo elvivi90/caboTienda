@@ -1,0 +1,15 @@
+.searched-list{
+  width: 60%;
+  border: 1px solid black;
+  text-decoration: none;
+}
+
+div div ul li {
+  list-style:none;
+  display: flex;
+  justify-content: space-between;
+}
+
+div div ul li:hover {
+  background-color: #0000000a;
+}
