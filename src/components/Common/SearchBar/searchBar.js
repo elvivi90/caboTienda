@@ -48,9 +48,12 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 
 
 
-const SearchBarComponent = ({data, dataSearched}) => {
+const SearchBarComponent = ({data, dataSearched, nullField}) => {
 
   const requestSearch = (searchedVal) => {
+    if (searchedVal === ""){
+      return nullField();
+    }
     const filteredRows = [];
     for (let i = 0; i < data.length; i++) {
       const currentPosition = Object.values(data[i]);

@@ -49,9 +49,17 @@ const Stock = (props) => {
     setSearched(searchedData);
   };
 
+  const nullHandler = () => {
+    setSearched(data);
+  }
+
   return (
     <div className="main">
-      <SearchBarComponent data={data} dataSearched={dataSearchedHandler} />
+      <SearchBarComponent
+        data={data}
+        dataSearched={dataSearchedHandler}
+        nullField={nullHandler}
+      />
       <div style={{ height: 400, width: "60%", marginTop: "5vh" }}>
         <DataGrid
           rows={searched || data}

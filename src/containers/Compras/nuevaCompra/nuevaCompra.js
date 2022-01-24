@@ -23,17 +23,25 @@ const NuevaCompra = () => {
   }, []);
 
   const dataSearchedHandler = (searchedData) => {
-    console.log(searchedData.length, data.lenght);
-    if (searchedData.lenght === data.lenght){
-      console.log("entre a la validacion")
-      setFilteredValues(undefined);
+    if (searchedData.length === data.length){
+      setFilteredValues(null);
     }
     setFilteredValues(searchedData);
   };
 
+  const nullHandler = () => {
+    console.log("dame")
+    setFilteredValues(null);
+  }
+
+  useEffect(() => {
+    console.log(filteredValues);
+    
+  }, [filteredValues]);
+
   return (
     <div className="main">
-      <SearchBarComponent data={data} dataSearched={dataSearchedHandler} />
+      <SearchBarComponent data={data} dataSearched={dataSearchedHandler} nullField={nullHandler}/>
       {filteredValues ? (
         <div className="searched-list">
           <ul>
@@ -42,6 +50,7 @@ const NuevaCompra = () => {
                 {item.nombre} {item.color}
                 <Button
                   onClick={() => {
+                    setFilteredValues(null);
                     setListItems([...listItems, item]);
                   }}
                   startIcon={<AddCircleIcon color="success" />}
