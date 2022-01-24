@@ -9,6 +9,8 @@ import Compras from "./containers/Compras/listadoCompras/Compras";
 import NuevaCompra from "./containers/Compras/nuevaCompra/nuevaCompra";
 import Balance from "./containers/Balances/Balance";
 
+console.log("hola")
+
 const App = (props) => {
     return (
       <React.Fragment>
