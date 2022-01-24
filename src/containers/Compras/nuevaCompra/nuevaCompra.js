@@ -31,6 +31,8 @@ const NuevaCompra = () => {
     setFilteredValues(searchedData);
   };
 
+  console.log(filteredValues)
+
   return (
     <div className="main">
       <SearchBarComponent data={data} dataSearched={dataSearchedHandler} />

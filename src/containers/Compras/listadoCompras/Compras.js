@@ -21,7 +21,7 @@ const columns = [
 
 const Compras = (props) => {
 
-  const [searched, setSearched] = useState();
+  // const [searched, setSearched] = useState();
   const [data, setData] = useState({});
   let navigate = useNavigate();
 
@@ -46,7 +46,7 @@ const Compras = (props) => {
       </div>
       <div style={{ height: 400, width: "60%", marginTop: "5vh" }}>
         <DataGrid
-          rows={searched || data}
+          rows={data}
           columns={columns}
           pageSize={5}
           rowsPerPageOptions={[5]}
