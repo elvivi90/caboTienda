@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { styled, alpha } from "@mui/material/styles";
-import InputBase from "@mui/material/InputBase";
 import { DataGrid } from "@mui/x-data-grid";
 import fireDB from "../../../firebaseConfig/firebaseConfig";
 import { ref, onValue } from "firebase/database";
@@ -25,7 +23,6 @@ const Compras = (props) => {
 
   const [searched, setSearched] = useState();
   const [data, setData] = useState({});
-  const [newPurchase, setNewPurchase] = useState(false);
   let navigate = useNavigate();
 
   const clickHandler = () => {
