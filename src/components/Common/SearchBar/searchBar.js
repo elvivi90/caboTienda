@@ -4,6 +4,7 @@ import InputBase from "@mui/material/InputBase";
 
 const SearchBar = styled("div")(({ theme }) => ({
   border: "1px solid",
+  width: "90%",
   marginTop: "5vh",
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -12,10 +13,9 @@ const SearchBar = styled("div")(({ theme }) => ({
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   marginLeft: 0,
-  width: "60%",
   [theme.breakpoints.up("sm")]: {
     marginLeft: theme.spacing(1),
-    width: "60%",
+    width: "88%",
   },
 }));
 

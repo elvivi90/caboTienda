@@ -52,7 +52,7 @@ const Compras = (props) => {
           rowsPerPageOptions={[5]}
           checkboxSelection
         />
-      </div>
+      </div>  
     </div>
   );
 };
