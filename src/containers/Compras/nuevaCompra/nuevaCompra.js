@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import SearchBarComponent from "../../../components/Common/SearchBar/searchBar";
 import Button from "@mui/material/Button";
+import PurchaseTable from "../../../components/UI/PuchaseTable";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import fireDB from "../../../firebaseConfig/firebaseConfig";
 import { ref, onValue } from "firebase/database";
-import './nuevaCompra.css'
-
+import "./nuevaCompra.css";
 
 const NuevaCompra = () => {
   const [data, setData] = useState({});
@@ -23,25 +23,28 @@ const NuevaCompra = () => {
   }, []);
 
   const dataSearchedHandler = (searchedData) => {
-    if (searchedData.length === data.length){
+    if (searchedData.length === data.length) {
       setFilteredValues(null);
     }
     setFilteredValues(searchedData);
   };
 
   const nullHandler = () => {
-    console.log("dame")
     setFilteredValues(null);
-  }
+  };
 
   useEffect(() => {
-    console.log(filteredValues);
-    
-  }, [filteredValues]);
+    // console.log(filteredValues);
+    console.log(listItems);
+  }, [filteredValues, listItems]);
 
   return (
     <div className="main">
-      <SearchBarComponent data={data} dataSearched={dataSearchedHandler} nullField={nullHandler}/>
+      <SearchBarComponent
+        data={data}
+        dataSearched={dataSearchedHandler}
+        nullField={nullHandler}
+      />
       {filteredValues ? (
         <div className="searched-list">
           <ul>
@@ -51,7 +54,7 @@ const NuevaCompra = () => {
                 <Button
                   onClick={() => {
                     setFilteredValues(null);
-                    setListItems([...listItems, item]);
+                    setListItems([...listItems, {...item, cantidad: 1}]);
                   }}
                   startIcon={<AddCircleIcon color="success" />}
                 ></Button>
@@ -60,19 +63,9 @@ const NuevaCompra = () => {
           </ul>
         </div>
       ) : null}
-      <div>
-        <ul>
-          <div>
-            {listItems.map((item) => (
-              <li>
-                {item.nombre} {item.color}
-              </li>
-            ))}
-          </div>
-        </ul>
-      </div>
+      <PurchaseTable items={listItems} setListItems={setListItems} />
     </div>
-  ); 
+  );
 };
 
 export default NuevaCompra;
