@@ -10,6 +10,7 @@ import Paper from "@mui/material/Paper";
 import Button from "@mui/material/Button";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import Modal from "../Common/Modal/Modal"
 
 import "./Purchase.css";
 
@@ -35,6 +36,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 const PurchaseTable = ({ items, setListItems }) => {
   const [grandTotal, setTotal] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const addHandler = (id) => {
     const newList = items.map((item) => {
@@ -45,6 +47,10 @@ const PurchaseTable = ({ items, setListItems }) => {
     });
     setListItems(newList);
   };
+
+  const showModalHandler = () => {
+    setShowModal(!showModal);
+  }
 
   const subtractHandler = (id, cantidad) => {
     if (cantidad >= 1) {
@@ -61,18 +67,20 @@ const PurchaseTable = ({ items, setListItems }) => {
       setListItems(auxArray);
     }
   };
-
-  console.log(grandTotal);
+  console.log(showModal);
 
   useEffect(() => {
     let total = [];
     total = items.map((item) => item.precio_compra * item.cantidad);
-    const t = total.reduce((a, b) => a + b);
+    let t = 0
+    for (let i = 0; i < total.length; i++) {
+      t += total[i];
+    }
     setTotal(t);
-  }, [grandTotal, items]);
+  }, [grandTotal, items, showModal]);
 
   return (
-    <div>
+    <div className="purcharse-table">
       {items ? (
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 700 }} aria-label="customized table">
@@ -90,7 +98,7 @@ const PurchaseTable = ({ items, setListItems }) => {
               {items.map((row) => (
                 <StyledTableRow key={row.nombre}>
                   <StyledTableCell component="th" scope="row">
-                    {row.nombre}
+                    {row.nombre} | {row.color} | {row.talle}
                   </StyledTableCell>
                   <StyledTableCell align="center">
                     {row.cantidad}
@@ -119,11 +127,17 @@ const PurchaseTable = ({ items, setListItems }) => {
             <TableBody>
               <StyledTableRow>
                 <StyledTableCell component="th" scope="row" />
-                <StyledTableCell component="th" scope="row" />
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell component="th" scope="row" align="center">
+                  {items.length > 0 ? (
+                    <Button variant="outlined" onClick={showModalHandler}>
+                      Listo!
+                    </Button>
+                  ) : null}
+                </StyledTableCell>
+                <StyledTableCell component="th" scope="row" align="center">
                   TOTAL
                 </StyledTableCell>
-                <StyledTableCell component="th" scope="row">
+                <StyledTableCell component="th" scope="row" align="center">
                   {grandTotal}
                 </StyledTableCell>
               </StyledTableRow>
@@ -131,6 +145,7 @@ const PurchaseTable = ({ items, setListItems }) => {
           </Table>
         </TableContainer>
       ) : null}
+      {showModal ? <Modal show={showModal} setShow={showModalHandler} total={grandTotal}/> : null}
     </div>
   );
 };

@@ -29,22 +29,37 @@ const NuevaCompra = () => {
     setFilteredValues(searchedData);
   };
 
+  const addItemHandler = (item) => {
+
+    const auxArray = listItems.filter((i) => i.id === item.id);
+    if (auxArray.length === 0 ){
+      setListItems([...listItems, { ...item, cantidad: 1 }]);
+    } 
+    if (auxArray.length > 0) {
+      const updatedArray = listItems.map(i => {
+        if (i.id === item.id) 
+        return {...i, cantidad: i.cantidad +1}
+        return i;
+      })
+      setListItems(updatedArray);
+    }
+
+  };
   const nullHandler = () => {
     setFilteredValues(null);
   };
 
   useEffect(() => {
-    // console.log(filteredValues);
-    console.log(listItems);
   }, [filteredValues, listItems]);
 
   return (
     <div className="main">
-      <SearchBarComponent
-        data={data}
-        dataSearched={dataSearchedHandler}
-        nullField={nullHandler}
-      />
+        <SearchBarComponent
+          data={data}
+          dataSearched={dataSearchedHandler}
+          nullField={nullHandler}
+        />
+
       {filteredValues ? (
         <div className="searched-list">
           <ul>
@@ -54,7 +69,7 @@ const NuevaCompra = () => {
                 <Button
                   onClick={() => {
                     setFilteredValues(null);
-                    setListItems([...listItems, {...item, cantidad: 1}]);
+                    addItemHandler({ ...item, cantidad: 0 });
                   }}
                   startIcon={<AddCircleIcon color="success" />}
                 ></Button>
